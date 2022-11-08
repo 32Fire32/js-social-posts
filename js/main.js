@@ -56,14 +56,20 @@ const posts = [
     }
 ];
 
+let likeButton;
+let likesNumber = 0;
+
 let counterLikes = [];
+
 let postList = document.getElementById("container");
 // Clonazione di un template html
 for(let i = 0; i < posts.length; i++) {
-    // console.log(i);
     const singlePost = posts[i];
+    console.log(singlePost.media);
+
     const postContainer = document.getElementById('template-post').content.cloneNode(true);
     postContainer.querySelector('.profile-pic').src = singlePost.author.image;
+    postContainer.querySelector('.post__image img').src = singlePost.media;
     // if( singlePost.name ) {
     //     postContainer.querySelector('.singlePost-name').innerHTML = singlePost.name;
     // } else {
@@ -73,19 +79,19 @@ for(let i = 0; i < posts.length; i++) {
     postContainer.querySelector('.post-meta__time').innerHTML = singlePost.created;
     postContainer.querySelector('.post__text').innerHTML = singlePost.content;
     postContainer.querySelector('img').src = singlePost.media;
-    postContainer.querySelector('.js-like-button').setAttribute('data-postid', singlePost.id);
+    postContainer.querySelector('.like-button.js-like-button').setAttribute('data-postid', singlePost.id);
+    postContainer.querySelector('.like-buttonjs-like-button');
     postContainer.querySelector('.js-likes-counter').innerHTML = singlePost.likes;
-    postList.append(postContainer);
-    
-    
+    postList.append(postContainer);  
 }
+
+
 let thumbUp = document.querySelectorAll('.js-like-button');    
     thumbUp.forEach(function(elem) {
     elem.addEventListener('click', function() {
         elem.classList.toggle('like-button--liked');
-        console.log('click');
-        // counterLikes.push(i);
-        // console.log(counterLikes);
-        // singlePost.likes += 1;
+        counterLikes += likesNumber + 1;
+        console.log(counterLikes);
+        })
     })
-})
+
