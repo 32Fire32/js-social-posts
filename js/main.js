@@ -1,3 +1,15 @@
+
+function onlyCapitalLetters(cap){
+    return  cap.match(/[A-Z]/g, "").join(''); // join the array to return a string
+}
+
+console.log(onlyCapitalLetters("Apple"));
+
+
+
+
+
+
 const posts = [
     {
         "id": 1,
@@ -65,16 +77,16 @@ let postList = document.getElementById("container");
 // Clonazione di un template html
 for(let i = 0; i < posts.length; i++) {
     const singlePost = posts[i];
-    console.log(singlePost.media);
+    // console.log(singlePost.author.name);
 
     const postContainer = document.getElementById('template-post').content.cloneNode(true);
-    postContainer.querySelector('.profile-pic').src = singlePost.author.image;
     postContainer.querySelector('.post__image img').src = singlePost.media;
-    // if( singlePost.name ) {
-    //     postContainer.querySelector('.singlePost-name').innerHTML = singlePost.name;
-    // } else {
-    //     postContainer.querySelector('.singlePost-name').remove();
-    // }
+    if( singlePost.author.image ) {
+        postContainer.querySelector('.profile-pic').src = singlePost.author.image;
+    } else {
+        postContainer.querySelector('.profile-pic').remove();
+        postContainer.querySelector('.post-meta__icon').innerHTML = onlyCapitalLetters(singlePost.author.name);
+    }
     postContainer.querySelector('.post-meta__author').innerHTML = singlePost.author.name;
     postContainer.querySelector('.post-meta__time').innerHTML = singlePost.created;
     postContainer.querySelector('.post__text').innerHTML = singlePost.content;
@@ -83,6 +95,7 @@ for(let i = 0; i < posts.length; i++) {
     postContainer.querySelector('.like-buttonjs-like-button');
     postContainer.querySelector('.js-likes-counter').innerHTML = singlePost.likes;
     postList.append(postContainer);  
+
 }
 
 
@@ -95,3 +108,4 @@ let thumbUp = document.querySelectorAll('.js-like-button');
         })
     })
 
+    
