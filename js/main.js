@@ -60,17 +60,21 @@ const posts = [
         "created": "2021-03-05"
     }
 ];
+
+
+
   
-
+let arrayId = [];
 let likesNumber = 0;
-
-let counterLikes = [];
 
 let postList = document.getElementById("container");
 // Clonazione di un template html
 for(let i = 0; i < posts.length; i++) {
     const singlePost = posts[i];
-    // console.log(singlePost.author.name);
+    // console.log(singlePost.created);
+    let year = singlePost.created.indexOf(4,3);
+    // console.log(year);
+
 
     const postContainer = document.getElementById('template-post').content.cloneNode(true);
     postContainer.querySelector('.post__image img').src = singlePost.media;
@@ -82,6 +86,7 @@ for(let i = 0; i < posts.length; i++) {
     }
     postContainer.querySelector('.post-meta__author').innerHTML = singlePost.author.name;
     postContainer.querySelector('.post-meta__time').innerHTML = singlePost.created;
+    
     postContainer.querySelector('.post__text').innerHTML = singlePost.content;
     postContainer.querySelector('img').src = singlePost.media;
     let likeButton = postContainer.querySelector('.like-button.js-like-button');
@@ -92,29 +97,50 @@ for(let i = 0; i < posts.length; i++) {
     likeButton.addEventListener('click', function(){
         likeButton.classList.toggle('like-button--liked');
         likesNumber += 1;
-        console.log(likesNumber);
-        console.log(likeButton);
 
         const classExists = document.getElementsByClassName('like-button--liked').length > 0;
 
         if (classExists) {
             counter.innerHTML = singlePost.likes + 1;
+            arrayId.push(singlePost.id);
+            console.log(arrayId);
         } else {
             counter.innerHTML = singlePost.likes ;
-}
-    });
+        }
+
+        
+    });    
 
     postList.append(postContainer);  
 }
 
-// let thumbUp = document.querySelectorAll('.js-like-button');    
-//     thumbUp.forEach(function(elem) {
-//     elem.addEventListener('click', function() {
-//         elem.classList.toggle('like-button--liked');
-//         counterLikes += likesNumber + 1;
-//         console.log(counterLikes);
-//         })
-//     })
 
 
-    
+// let year;
+// let month;
+// let day;
+
+// for ( let key in posts){
+//     console.log(posts[key].created);
+//     let date = posts[key].created;
+//     for ( let i = 0; i < 4; i++) {
+//         // console.log(date[i]);
+//         year = Number(date[i]);
+//         // year.push(date[i]);
+//         console.log(year);
+//     }
+//     for ( let i = 5; i < 7; i++) {
+//         // console.log(date[i]);
+//         month = date[i];
+//         // console.log(month);
+//     }
+//     for ( let i = 8; i < 11; i++) {
+//         // console.log(date[i]);
+//         day = date[i];
+//         // console.log(day);
+//         // day.toString();
+//     }
+// }
+
+// const date = new Date(Date.UTC(year, Number(month), Number(day)));
+// console.log(date.toLocaleDateString());
