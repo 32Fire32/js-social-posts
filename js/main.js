@@ -55,24 +55,37 @@ const posts = [
         "created": "2021-03-05"
     }
 ];
+
+let counterLikes = [];
 let postList = document.getElementById("container");
 // Clonazione di un template html
 for(let i = 0; i < posts.length; i++) {
-    console.log(posts[i].likes);
+    // console.log(i);
     const singlePost = posts[i];
     const postContainer = document.getElementById('template-post').content.cloneNode(true);
-    postContainer.querySelector('.profile-pic').src = posts[i].author.image;
+    postContainer.querySelector('.profile-pic').src = singlePost.author.image;
     // if( singlePost.name ) {
     //     postContainer.querySelector('.singlePost-name').innerHTML = singlePost.name;
     // } else {
     //     postContainer.querySelector('.singlePost-name').remove();
     // }
-    postContainer.querySelector('.post-meta__author').innerHTML = posts[i].author.name;
-    postContainer.querySelector('.post-meta__time').innerHTML = posts[i].created;
-    postContainer.querySelector('.post__text').innerHTML = posts[i].content;
-    postContainer.querySelector('img').src = posts[i].media;
-    postContainer.querySelector('.js-like-button').setAttribute('data-postid', posts[i].id);
-    postContainer.querySelector('.js-likes-counter').innerHTML = posts[i].likes;
-
+    postContainer.querySelector('.post-meta__author').innerHTML = singlePost.author.name;
+    postContainer.querySelector('.post-meta__time').innerHTML = singlePost.created;
+    postContainer.querySelector('.post__text').innerHTML = singlePost.content;
+    postContainer.querySelector('img').src = singlePost.media;
+    postContainer.querySelector('.js-like-button').setAttribute('data-postid', singlePost.id);
+    postContainer.querySelector('.js-likes-counter').innerHTML = singlePost.likes;
     postList.append(postContainer);
+    
+    
 }
+let thumbUp = document.querySelectorAll('.js-like-button');    
+    thumbUp.forEach(function(elem) {
+    elem.addEventListener('click', function() {
+        elem.classList.toggle('like-button--liked');
+        console.log('click');
+        // counterLikes.push(i);
+        // console.log(counterLikes);
+        // singlePost.likes += 1;
+    })
+})
