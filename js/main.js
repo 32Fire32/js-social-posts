@@ -55,17 +55,24 @@ const posts = [
         "created": "2021-03-05"
     }
 ];
-
+let postList = document.getElementById("container");
 // Clonazione di un template html
-// for(let i = 0; i < team.length; i++) {
-//     const employee = team[i];
-//     const listItem = document.getElementById('template-employee').content.cloneNode(true);
-//     listItem.querySelector('.employee-avatar').innerHTML = employee.avatar;
-//     if( employee.name ) {
-//         listItem.querySelector('.employee-name').innerHTML = employee.name;
-//     } else {
-//         listItem.querySelector('.employee-name').remove();
-//     }
-//     listItem.querySelector('.employee-role').innerHTML = employee.role;
+for(let i = 0; i < posts.length; i++) {
+    console.log(posts[i].likes);
+    const singlePost = posts[i];
+    const postContainer = document.getElementById('template-post').content.cloneNode(true);
+    postContainer.querySelector('.profile-pic').src = posts[i].author.image;
+    // if( singlePost.name ) {
+    //     postContainer.querySelector('.singlePost-name').innerHTML = singlePost.name;
+    // } else {
+    //     postContainer.querySelector('.singlePost-name').remove();
+    // }
+    postContainer.querySelector('.post-meta__author').innerHTML = posts[i].author.name;
+    postContainer.querySelector('.post-meta__time').innerHTML = posts[i].created;
+    postContainer.querySelector('.post__text').innerHTML = posts[i].content;
+    postContainer.querySelector('img').src = posts[i].media;
+    postContainer.querySelector('.js-like-button').setAttribute('data-postid', posts[i].id);
+    postContainer.querySelector('.js-likes-counter').innerHTML = posts[i].likes;
 
-//     teamContainer.append(listItem);
+    postList.append(postContainer);
+}
