@@ -1,14 +1,7 @@
-
+// FUNZIONI
 function onlyCapitalLetters(cap){
     return  cap.match(/[A-Z]/g, "").join(''); // join the array to return a string
 }
-
-console.log(onlyCapitalLetters("Apple"));
-
-
-
-
-
 
 const posts = [
     {
@@ -67,6 +60,7 @@ const posts = [
         "created": "2021-03-05"
     }
 ];
+let thumbUp = document.querySelector('.js-like-button');    
 
 let likeButton;
 let likesNumber = 0;
@@ -91,21 +85,24 @@ for(let i = 0; i < posts.length; i++) {
     postContainer.querySelector('.post-meta__time').innerHTML = singlePost.created;
     postContainer.querySelector('.post__text').innerHTML = singlePost.content;
     postContainer.querySelector('img').src = singlePost.media;
-    postContainer.querySelector('.like-button.js-like-button').setAttribute('data-postid', singlePost.id);
-    postContainer.querySelector('.like-buttonjs-like-button');
+    let likeButton = postContainer.querySelector('.like-button.js-like-button');
+    likeButton.setAttribute('data-postid', singlePost.id);
     postContainer.querySelector('.js-likes-counter').innerHTML = singlePost.likes;
-    postList.append(postContainer);  
+    likeButton.addEventListener('click', function(){
+        likeButton.classList.toggle('like-button--liked');        
+    });
 
+    postList.append(postContainer);  
 }
 
+// let thumbUp = document.querySelectorAll('.js-like-button');    
+//     thumbUp.forEach(function(elem) {
+//     elem.addEventListener('click', function() {
+//         elem.classList.toggle('like-button--liked');
+//         counterLikes += likesNumber + 1;
+//         console.log(counterLikes);
+//         })
+//     })
 
-let thumbUp = document.querySelectorAll('.js-like-button');    
-    thumbUp.forEach(function(elem) {
-    elem.addEventListener('click', function() {
-        elem.classList.toggle('like-button--liked');
-        counterLikes += likesNumber + 1;
-        console.log(counterLikes);
-        })
-    })
 
     
