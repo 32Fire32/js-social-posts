@@ -60,9 +60,8 @@ const posts = [
         "created": "2021-03-05"
     }
 ];
-let thumbUp = document.querySelector('.js-like-button');    
+  
 
-let likeButton;
 let likesNumber = 0;
 
 let counterLikes = [];
@@ -87,9 +86,22 @@ for(let i = 0; i < posts.length; i++) {
     postContainer.querySelector('img').src = singlePost.media;
     let likeButton = postContainer.querySelector('.like-button.js-like-button');
     likeButton.setAttribute('data-postid', singlePost.id);
-    postContainer.querySelector('.js-likes-counter').innerHTML = singlePost.likes;
+    let counter = postContainer.querySelector('.js-likes-counter')
+    counter.innerHTML = singlePost.likes;
+
     likeButton.addEventListener('click', function(){
-        likeButton.classList.toggle('like-button--liked');        
+        likeButton.classList.toggle('like-button--liked');
+        likesNumber += 1;
+        console.log(likesNumber);
+        console.log(likeButton);
+
+        const classExists = document.getElementsByClassName('like-button--liked').length > 0;
+
+        if (classExists) {
+            counter.innerHTML = singlePost.likes + 1;
+        } else {
+            counter.innerHTML = singlePost.likes ;
+}
     });
 
     postList.append(postContainer);  
